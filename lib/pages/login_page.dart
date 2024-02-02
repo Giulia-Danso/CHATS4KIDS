@@ -1,5 +1,7 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
+import 'package:chat4kids/pages/forgot_password.dart';
+import 'package:chat4kids/pages/register_page.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +96,22 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
               ),
               const SizedBox(height: 50),
+              TextButton(
+                onPressed: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword()),
+                  );
+                }),
+                child: const Text(
+                  'Password Forgotten? Reset here',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+
               //sign in button
               MyButton(
                 onTap: signIn,
@@ -113,7 +131,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
-                    onTap: widget.onTap,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  RegisterPage(onTap: () {})));
+                    },
                     child: const Text(
                       'REGISTER',
                       style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
+import 'package:chat4kids/pages/login_page.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final usernameController = TextEditingController();
 
   // sign up user
   void signUp() async {
@@ -80,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               //welcome back message
               const Text(
-                'Hey you 😁, ',
+                'Hey you 😁!!!, ',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -94,13 +96,26 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
+              const Text(
+                'with your Parent ☺️',
+                style: TextStyle(
+                  color: Colors.greenAccent,
+                  fontSize: 16,
+                ),
+              ),
 
               const SizedBox(height: 25),
 
+              MyTextField(
+                controller: usernameController,
+                hintText: 'what your name?',
+                obscureText: false,
+              ),
+              const SizedBox(height: 15),
               //email textfield
               MyTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: 'Parent´s Email',
                 obscureText: false,
               ),
               const SizedBox(height: 15),
@@ -137,7 +152,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(
-                    onTap: widget.onTap,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginPage(onTap: () {})));
+                    },
                     child: const Text(
                       'LOGIN',
                       style: TextStyle(
