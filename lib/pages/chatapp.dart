@@ -1,3 +1,5 @@
+import 'package:chat4kids/pages/login_page.dart';
+import 'package:chat4kids/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 class ChatApp extends StatelessWidget {
@@ -48,7 +50,13 @@ class ChatApp extends StatelessWidget {
                 ),
                 const SizedBox(height: 150),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(onTap: () {}),
+                        ));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.greenAccent,
                   ),
@@ -61,7 +69,13 @@ class ChatApp extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterPage(onTap: () {}),
+                        ));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.greenAccent,
                   ),

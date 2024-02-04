@@ -1,6 +1,7 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
 import 'package:chat4kids/pages/forgot_password.dart';
+import 'package:chat4kids/pages/profile.dart';
 import 'package:chat4kids/pages/register_page.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,13 @@ class _LoginPageState extends State<LoginPage> {
       await authService.signInWithEmailandPassword(
         emailController.text,
         passwordController.text,
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(username: ''),
+        ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -133,10 +141,11 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  RegisterPage(onTap: () {})));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterPage(onTap: () {}),
+                        ),
+                      );
                     },
                     child: const Text(
                       'REGISTER',

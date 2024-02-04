@@ -27,18 +27,30 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat4kids HomePage'),
-        actions: [
-          // sign out button
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
-          ),
-        ],
-      ),
-      body: _buildUserList(),
-    );
+        appBar: AppBar(
+          backgroundColor: Colors.greenAccent,
+          title: const Text('Chat4kids HomePage'),
+          actions: [
+            // sign out button
+            IconButton(
+              onPressed: signOut,
+              icon: const Icon(Icons.logout),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/confetti3.jpeg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            _buildUserList(),
+          ],
+        ));
   }
 
   // build a list of users except for the current logged in user

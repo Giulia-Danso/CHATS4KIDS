@@ -38,20 +38,33 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.greenAccent,
         title: Text(
           widget.receiverUserEmail,
         ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // messages
-          Expanded(
-            child: _buildMessageList(),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/confetti3.jpeg'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
+          Column(
+            children: [
+              // messages
+              Expanded(
+                child: _buildMessageList(),
+              ),
 
-          // user input
-          _buildMessageInput(),
-          const SizedBox(height: 25),
+              // user input
+              _buildMessageInput(),
+              const SizedBox(height: 25),
+            ],
+          ),
         ],
       ),
     );
@@ -101,7 +114,10 @@ class _ChatPageState extends State<ChatPage> {
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
           children: [
-            Text(data['senderEmail']),
+            Text(
+              data['senderEmail'],
+              style: const TextStyle(color: Colors.white),
+            ),
             const SizedBox(height: 5),
             ChatBubble(message: data['message']),
           ],
@@ -125,10 +141,14 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
           //send button
+          const SizedBox(
+            width: 10,
+          ),
           IconButton(
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
+              Icons.send,
+              color: Colors.greenAccent,
               size: 40,
             ),
           ),

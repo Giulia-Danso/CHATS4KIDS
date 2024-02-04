@@ -1,3 +1,5 @@
+import 'package:chat4kids/pages/notification_page.dart';
+import 'package:chat4kids/pages/theme_settings_page.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -16,6 +18,30 @@ class SettingsPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        child: ListView(children: [
+          ListTile(
+            title: const Text('Theme'),
+            leading: const Icon(Icons.color_lens),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ThemeSettingsPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: const Text('Notification'),
+            leading: const Icon(Icons.notifications),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationPage(),
+                  ));
+            },
+          )
+        ]),
       ),
     );
   }
