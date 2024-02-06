@@ -1,5 +1,11 @@
+import 'package:chat4kids/pages/change_name.dart';
+
+import 'package:chat4kids/pages/home_page.dart';
+import 'package:chat4kids/pages/login_page.dart';
 import 'package:chat4kids/pages/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
   final String username;
@@ -14,10 +20,40 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late ImagePicker _imagePicker;
+  XFile? _selectedImage;
+  @override
+  void initState() {
+    super.initState();
+    _imagePicker = ImagePicker();
+  }
+
+  Future<void> _pickImage() async {
+    final XFile? selectedImage =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (selectedImage != null) {
+      setState(() {
+        _selectedImage = selectedImage;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(
+                    onTap: () {},
+                  ),
+                ));
+          },
+        ),
         backgroundColor: Colors.greenAccent,
         actions: [
           IconButton(
@@ -41,17 +77,18 @@ class _ProfilePageState extends State<ProfilePage> {
             fit: BoxFit.cover,
           ),
         ),
-
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('assets/giulia.jpeg'),
-              ),
-              const SizedBox(
-                height: 20,
+              GestureDetector(
+                onTap: _pickImage,
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: _selectedImage != null
+                      ? FileImage(File(_selectedImage!.path))
+                      : const AssetImage('assets/giulia.jpeg') as ImageProvider,
+                ),
               ),
               Text(
                 'Hello, ${widget.username}!',
@@ -61,27 +98,61 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
-              GestureDetector(
+              const Divider(
+                color: Colors.white,
+              ),
+              Center(
+                child: ListTile(
+                  onTap: () {
+                    // Navigate
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeName(),
+                      ),
+                    );
+                  },
+                  title: const Text(
+                    'Change Name',
+                    style: TextStyle(
+                      color: Colors.greenAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+              const Divider(
+                color: Colors.white,
+              ),
+              ListTile(
                 onTap: () {
-                  // Navigate
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
                 },
-                child: const Text(
-                  'Change Name',
+                title: const Text(
+                  'Open Chat',
                   style: TextStyle(
-                    color: Colors.greenAccent,
                     fontSize: 16,
+                    color: Colors.greenAccent,
+                    fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,
                   ),
                 ),
               ),
+              const Divider(
+                color: Colors.white,
+              ),
             ],
           ),
         ),
-        // add  profile picture
-
-        // add name and change name option
       ),
     );
   }

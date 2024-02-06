@@ -9,7 +9,14 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        backgroundColor: Colors.greenAccent,
+        title: const Text(
+          'Settings',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -20,8 +27,18 @@ class SettingsPage extends StatelessWidget {
         ),
         child: ListView(children: [
           ListTile(
-            title: const Text('Theme'),
-            leading: const Icon(Icons.color_lens),
+            title: const Text(
+              'Theme',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.greenAccent,
+              ),
+            ),
+            leading: const Icon(
+              Icons.color_lens,
+              color: Colors.black,
+            ),
             onTap: () {
               Navigator.push(
                   context,
@@ -30,9 +47,22 @@ class SettingsPage extends StatelessWidget {
                   ));
             },
           ),
+          const Divider(
+            color: Colors.grey,
+          ),
           ListTile(
-            title: const Text('Notification'),
-            leading: const Icon(Icons.notifications),
+            title: const Text(
+              'Notifications',
+              style: TextStyle(
+                color: Colors.greenAccent,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            leading: const Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
             onTap: () {
               Navigator.push(
                   context,
@@ -40,7 +70,10 @@ class SettingsPage extends StatelessWidget {
                     builder: (context) => NotificationPage(),
                   ));
             },
-          )
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
         ]),
       ),
     );
