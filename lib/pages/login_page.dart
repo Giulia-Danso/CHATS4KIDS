@@ -54,6 +54,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.greenAccent,
+        title: const Text(
+          'Login',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -63,8 +73,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: ListView(
             children: [
               //logo
               Center(
@@ -81,9 +90,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               //welcome back message
               const Text(
-                'Welcome back , you´ve been missed!!',
+                'Welcome back ☺️🤗🤗, you´ve been missed!!',
                 style: TextStyle(
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
@@ -103,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Password',
                 obscureText: true,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               TextButton(
                 onPressed: (() {
                   Navigator.push(
@@ -111,15 +121,39 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => ForgotPassword()),
                   );
                 }),
-                child: const Text(
-                  'Password Forgotten? Reset here',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                child: const Row(
+                  children: [
+                    Text(
+                      'Password ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      'Forgotten?',
+                      style: TextStyle(
+                        color: Colors.greenAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      ' Reset here',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
               //sign in button
               MyButton(
                 onTap: signIn,
@@ -152,6 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent,
+                        fontSize: 18,
                       ),
                     ),
                   ),

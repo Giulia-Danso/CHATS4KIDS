@@ -68,7 +68,13 @@ class _ProfilePageState extends State<ProfilePage> {
             icon: const Icon(Icons.settings),
           ),
         ],
-        title: const Text('My Profile'),
+        title: const Text(
+          'My Profile',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -114,13 +120,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     );
                   },
-                  title: const Text(
-                    'Change Name',
-                    style: TextStyle(
-                      color: Colors.greenAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      decoration: TextDecoration.underline,
+                  title: const Center(
+                    child: Text(
+                      'Change Name 🔄',
+                      style: TextStyle(
+                        color: Colors.greenAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                      ),
                     ),
                   ),
                 ),
@@ -137,13 +144,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                 },
-                title: const Text(
-                  'Open Chat',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.greenAccent,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
+                title: const Center(
+                  child: Text(
+                    'Open Chat 💬 ',
+                    style: TextStyle(
+                      fontSize: 23,
+                      color: Colors.greenAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

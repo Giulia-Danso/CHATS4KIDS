@@ -29,7 +29,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.greenAccent,
-          title: const Text('Chat4kids HomePage'),
+          title: const Text(
+            'Chat4kids HomePage',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
           actions: [
             // sign out button
             IconButton(
