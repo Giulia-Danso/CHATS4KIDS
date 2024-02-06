@@ -1,6 +1,8 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
+import 'package:chat4kids/pages/congratulations_page.dart';
 import 'package:chat4kids/pages/login_page.dart';
+import 'package:chat4kids/pages/profile.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +43,8 @@ class _RegisterPageState extends State<RegisterPage> {
         emailController.text,
         passwordController.text,
       );
+      // congratulation message
+      _showCongratulationsDialog();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -52,9 +56,47 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  void _showCongratulationsDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Congratulation! 🥳'),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Congratulation 🥳 !'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(username: '')));
+                },
+                child: const Text('go to Profile'),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.greenAccent,
+        title: const Text(
+          'Register',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -64,8 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
               //logo
               Center(
@@ -80,21 +121,25 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 5,
+              ),
               //welcome back message
               const Text(
                 'Hey you 😁!!!, ',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
               const Text(
                 'lets create you an account!',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const Text(
                 'with your Parent ☺️',
@@ -104,21 +149,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
 
               MyTextField(
                 controller: usernameController,
                 hintText: 'what your name?',
                 obscureText: false,
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 7),
               //email textfield
               MyTextField(
                 controller: emailController,
                 hintText: 'Parent´s Email',
                 obscureText: false,
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 7),
 
               //password textfield
               MyTextField(
@@ -126,19 +171,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'Password',
                 obscureText: true,
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 7),
               MyTextField(
                 controller: confirmPasswordController,
                 hintText: 'Confirm Password',
                 obscureText: true,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
               //sign in button
               MyButton(
-                onTap: signUp,
+                onTap: _showCongratulationsDialog,
                 text: "Sign Up",
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               //not a member? register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
