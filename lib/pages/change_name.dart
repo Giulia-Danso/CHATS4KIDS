@@ -21,36 +21,55 @@ class _ChangeNameState extends State<ChangeName> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Change Name'),
-      content: TextField(
-        controller: _newNameController,
-        decoration: const InputDecoration(hintText: 'Enter new name'),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/confetti3.jpeg'),
+          fit: BoxFit.cover,
+        ),
       ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text(
-            'Cancel ❌',
-            style: TextStyle(color: Colors.black),
+      child: AlertDialog(
+        backgroundColor: Colors.greenAccent,
+        title: const Text(
+          'Change Name',
+          style: TextStyle(
+            color: Colors.black,
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            final newName = _newNameController.text;
-            widget.onChange(newName);
-            Navigator.of(context).pop();
-          },
-          child: const Text(
-            'Confirm 👍',
-            style: TextStyle(
-              color: Colors.black,
+        content: TextField(
+          controller: _newNameController,
+          decoration: const InputDecoration(
+            hintText: 'Enter new name',
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'Cancel ❌',
+              style: TextStyle(color: Colors.black),
             ),
           ),
-        ),
-      ],
+          ElevatedButton(
+            style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Colors.green),
+            ),
+            onPressed: () {
+              final newName = _newNameController.text;
+              widget.onChange(newName);
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+              'Confirm 👍',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

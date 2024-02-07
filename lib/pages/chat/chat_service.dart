@@ -2,11 +2,31 @@ import 'package:chat4kids/components/model/message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class ChatService extends ChangeNotifier {
   //get instance of auth and firestore
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+
+  Future<String> uploadImage(File imageFile) async {
+    try {
+      String imageName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+      Reference ref = _storage.ref().child('images/$imageName');
+
+      await ref.putFile(imageFile);
+
+      String imageUrl = await ref.getDownloadURL();
+
+      return imageUrl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      throw e;
+    }
+  }
 
   // send message
   Future<void> sendMessage(String receiverId, String message) async {

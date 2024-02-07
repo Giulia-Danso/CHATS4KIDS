@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:chat4kids/components/chat_bubble.dart';
 import 'package:chat4kids/components/mytextfield.dart';
 import 'package:chat4kids/pages/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverUserEmail;
@@ -22,6 +25,7 @@ class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final ImagePicker _imagePicker = ImagePicker();
 
   void sendMessage() async {
     // only send message if there is something to send
@@ -31,6 +35,17 @@ class _ChatPageState extends State<ChatPage> {
 
       // clear the text controller after sending the message
       _messageController.clear();
+    }
+  }
+
+  void sendImage() async {
+    final XFile? selectedImage =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (selectedImage != null) {
+      String imageUrl =
+          await _chatService.uploadImage(File(selectedImage.path));
+      await _chatService.sendMessage(widget.receiverUserID, imageUrl);
     }
   }
 
@@ -141,13 +156,21 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
           //send button
-          const SizedBox(
-            width: 10,
-          ),
+          //const SizedBox(
+          //width: 10,
+          //),
           IconButton(
             onPressed: sendMessage,
             icon: const Icon(
               Icons.send,
+              color: Colors.greenAccent,
+              size: 40,
+            ),
+          ),
+          IconButton(
+            onPressed: sendImage,
+            icon: const Icon(
+              Icons.image,
               color: Colors.greenAccent,
               size: 40,
             ),
