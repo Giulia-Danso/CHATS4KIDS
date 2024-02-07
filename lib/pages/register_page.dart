@@ -1,6 +1,6 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
-import 'package:chat4kids/pages/congratulations_page.dart';
+
 import 'package:chat4kids/pages/login_page.dart';
 import 'package:chat4kids/pages/profile.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final usernameController = TextEditingController();
+  bool confirmParentEmail = false;
 
   // sign up user
   void signUp() async {
@@ -61,11 +62,23 @@ class _RegisterPageState extends State<RegisterPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Congratulation! 🥳'),
+            backgroundColor: Colors.lightGreenAccent,
+            title: const Text(
+              'Congratulation! 🥳',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
             content: const SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('Congratulation 🥳 !'),
+                  Text(
+                    'Congratulation 🥳 ! Registration was successful!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -73,11 +86,19 @@ class _RegisterPageState extends State<RegisterPage> {
               TextButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfilePage(username: '')));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProfilePage(username: usernameController.text),
+                    ),
+                  );
                 },
-                child: const Text('go to Profile'),
+                child: const Text(
+                  'go to Profile',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           );
@@ -125,27 +146,34 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 5,
               ),
               //welcome back message
-              const Text(
-                'Hey you 😁!!!, ',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 5),
-              const Text(
-                'lets create you an account!',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+              const Center(
+                child: Text(
+                  'Hey you 😁!!!, ',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              const Text(
-                'with your Parent ☺️',
-                style: TextStyle(
-                  color: Colors.greenAccent,
-                  fontSize: 16,
+              const SizedBox(height: 5),
+              const Center(
+                child: Text(
+                  'lets create you an account!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const Center(
+                child: Text(
+                  'with your Parent ☺️',
+                  style: TextStyle(
+                    color: Colors.greenAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ),
 

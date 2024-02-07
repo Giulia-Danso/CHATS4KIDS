@@ -3,7 +3,8 @@ import 'package:chat4kids/components/mytextfield.dart';
 import 'package:flutter/material.dart';
 
 class ChangeName extends StatefulWidget {
-  const ChangeName({super.key});
+  final void Function(String newName) onChange;
+  const ChangeName({super.key, required this.onChange});
 
   @override
   State<ChangeName> createState() => _ChangeNameState();
@@ -20,78 +21,36 @@ class _ChangeNameState extends State<ChangeName> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.greenAccent,
-        title: const Text('Change Name'),
+    return AlertDialog(
+      title: const Text('Change Name'),
+      content: TextField(
+        controller: _newNameController,
+        decoration: const InputDecoration(hintText: 'Enter new name'),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/confetti3.jpeg'),
-            fit: BoxFit.cover,
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'Cancel ❌',
+            style: TextStyle(color: Colors.black),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(
-            16.0,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Row(
-                children: [
-                  Text(
-                    'Do you want to  ',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              const Row(
-                children: [
-                  Text(
-                    'Change',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.greenAccent,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              const Row(
-                children: [
-                  Text(
-                    'your name?',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              MyTextField(
-                controller: _newNameController,
-                hintText: 'Enter new Name',
-                obscureText: false,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              MyButton(onTap: confirmNameChange, text: 'Confirm 👍')
-            ],
+        ElevatedButton(
+          onPressed: () {
+            final newName = _newNameController.text;
+            widget.onChange(newName);
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'Confirm 👍',
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

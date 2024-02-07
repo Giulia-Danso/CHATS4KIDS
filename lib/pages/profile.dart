@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
-  final String username;
+  String username;
 
   ProfilePage({
     super.key,
@@ -116,7 +116,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChangeName(),
+                        builder: (context) => ChangeName(
+                          onChange: (newName) {
+                            setState(() {
+                              widget.username = newName;
+                            });
+                          },
+                        ),
                       ),
                     );
                   },
