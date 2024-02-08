@@ -1,6 +1,10 @@
 import 'package:chat4kids/components/my_buttons.dart';
 import 'package:chat4kids/components/mytextfield.dart';
+<<<<<<< HEAD
 
+=======
+import 'package:chat4kids/pages/congratulations_page.dart';
+>>>>>>> 2073bd4e676081c64cd0605b4dad100f72b32652
 import 'package:chat4kids/pages/login_page.dart';
 import 'package:chat4kids/pages/profile.dart';
 import 'package:chat4kids/services/auth/auth_service.dart';
@@ -146,6 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 5,
               ),
               //welcome back message
+<<<<<<< HEAD
               const Center(
                 child: Text(
                   'Hey you 😁!!!, ',
@@ -164,6 +169,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
+=======
+              const Text(
+                'Hey you 😁!!!, ',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'lets create you an account!',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+>>>>>>> 2073bd4e676081c64cd0605b4dad100f72b32652
                 ),
               ),
               const Center(
@@ -208,7 +229,16 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 10),
               //sign in button
               MyButton(
+<<<<<<< HEAD
                 onTap: _showCongratulationsDialog,
+=======
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CongratulationsPage()));
+                },
+>>>>>>> 2073bd4e676081c64cd0605b4dad100f72b32652
                 text: "Sign Up",
               ),
               const SizedBox(height: 20),
